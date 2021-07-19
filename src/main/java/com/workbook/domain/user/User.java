@@ -3,8 +3,14 @@ package com.workbook.domain.user;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
+
 
 @Getter
 @NoArgsConstructor
@@ -15,7 +21,7 @@ public class User {
     private Long id;
 
     @Column(nullable = false)
-    private String userId;
+    private String userid;
 
     @Column(nullable = false)
     private String pw;
@@ -23,11 +29,15 @@ public class User {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private String auth;
+
     @Builder
-    public User(String userId, String pw, String name){
-        this.userId=userId;
+    public User(String userid, String pw, String name,String auth){
+        this.userid=userid;
         this.pw=pw;
         this.name=name;
+        this.auth =auth;
     }
 
 }
