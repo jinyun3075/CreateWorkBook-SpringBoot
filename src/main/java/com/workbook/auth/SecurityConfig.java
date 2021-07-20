@@ -1,4 +1,4 @@
-package com.workbook.config;
+package com.workbook.auth;
 
 import com.workbook.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -10,42 +10,39 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     private final UserService userService;
-    @Bean
-    public PasswordEncoder passwordEncoder(){ //패스워드 암호화
-        return new BCryptPasswordEncoder();
-    }
 
     @Override
-    public void configure(WebSecurity web) throws Exception { //인증 무시 설정
-        web.ignoring().antMatchers("/css/**","/js/**");
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/css/**","/js/**","/img/**");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/**").permitAll()
+                    .antMatchers("/admin")
+                    .authenticated()
+                    .anyRequest().permitAll()
                 .and()
-            .formLogin()
-                .defaultSuccessUrl("/")
-                .permitAll()
+                    .formLogin()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/main")
+                    .permitAll()
                 .and()
-            .logout()
-                .logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
+                    .logout()
+                    .logoutSuccessUrl("/")
+                    .invalidateHttpSession(true)
                 .and()
-            .exceptionHandling();
+                    .csrf().disable();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
     }
 }

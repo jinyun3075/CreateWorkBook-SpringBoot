@@ -13,13 +13,12 @@ public class UserJoinDto {
     private String userid;
     private String pw;
     private String name;
-    private String auth;
     @Builder
     public UserJoinDto(String userid,String pw,String name){
         this.userid=userid;
         this.pw=pw;
         this.name=name;
-        auth="ROLE_MEMBER";
+
     }
 
     public User toEntity(){
@@ -27,7 +26,7 @@ public class UserJoinDto {
                 .userid(userid)
                 .pw(pw)
                 .name(name)
-                .auth(auth)
+                .auth(Role.MEMBER.getVal())
                 .build();
     }
 }

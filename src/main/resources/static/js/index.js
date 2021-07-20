@@ -11,8 +11,8 @@ var main={
         };
 
          $.ajax({
-            type:'GET',
-            url: '/api/login',
+            type:'post',
+            url: '/login',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)

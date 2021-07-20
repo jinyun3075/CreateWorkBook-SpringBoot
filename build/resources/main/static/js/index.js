@@ -3,6 +3,7 @@ var main={
         var _this = this;
         $('#login').on('click',function(){_this.login();});
         $('#join').on('click',function(){_this.join();});
+        $('#logout').on('click',function(){_this.logout();});
     },
     login : function(){
         var data={
@@ -11,8 +12,8 @@ var main={
         };
 
          $.ajax({
-            type:'GET',
-            url: '/api/login',
+            type:'post',
+            url: '/login',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
@@ -42,6 +43,20 @@ var main={
             }).fail(function(error){
                 alert('회원가입 실패');
             });
-        }
+        },
+        logout : function(){
+                     $.ajax({
+                        type:'GET',
+                        url: '/api/logout',
+                        dataType: 'json',
+                        contentType:'application/json; charset=utf-8',
+
+                    }).done(function(){
+                        alert('로그아웃 완료.');
+                        window.location.href ='/';
+                    }).fail(function(error){
+                        alert('로그아웃 실패');
+                    });
+                }
 }
 main.init();
