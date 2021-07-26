@@ -1,13 +1,15 @@
 package com.workbook.web;
 
-import lombok.RequiredArgsConstructor;
+import com.workbook.domain.user.User;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+
 @Controller
-@RequiredArgsConstructor
 public class IndexController {
     @GetMapping("/")
     public String index(){
@@ -23,7 +25,9 @@ public class IndexController {
         return "adminPage";
     }
     @GetMapping("/main")
-    public String main(){
+    public String main(Model model, Authentication authentication){
+        User user =(User)authentication.getPrincipal();
+        model.addAttribute("user",user.getName());
         return "main";
     }
 
