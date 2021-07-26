@@ -12,8 +12,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class IndexController {
     @GetMapping("/")
-    public String index(){
+    public String index(Model model, Authentication authentication){
+        User user =null;
+        if(authentication!=null){
+        user =(User)authentication.getPrincipal();
+            model.addAttribute("user",user.getName());
+       }
         return "index";
+    }
+    @GetMapping("/generic")
+    public String generic(){
+        return "generic";
+    }
+    @GetMapping("/elements")
+    public String elements(){
+        return "elements";
     }
     @GetMapping("/join")
     public String join(){ return "join";
@@ -24,12 +37,7 @@ public class IndexController {
     public @ResponseBody String ad(){
         return "adminPage";
     }
-    @GetMapping("/main")
-    public String main(Model model, Authentication authentication){
-        User user =(User)authentication.getPrincipal();
-        model.addAttribute("user",user.getName());
-        return "main";
-    }
+
 
 
 }
