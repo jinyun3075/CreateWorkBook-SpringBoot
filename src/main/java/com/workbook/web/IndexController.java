@@ -7,18 +7,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 
 
 @Controller
 public class IndexController {
     @GetMapping("/")
-    public String index(Model model, Authentication authentication){
+    public String index(Model model,Authentication authentication){
         User user =null;
         if(authentication!=null){
         user =(User)authentication.getPrincipal();
             model.addAttribute("user",user.getName());
        }
         return "index";
+    }
+    @GetMapping("/update")
+    public String update(Model model,Authentication authentication){
+        User user =(User)authentication.getPrincipal();
+        model.addAttribute("user",user.getName());
+        return "update";
     }
     @GetMapping("/generic")
     public String generic(){

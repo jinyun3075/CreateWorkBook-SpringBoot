@@ -1,4 +1,4 @@
-package com.workbook.web.dto;
+package com.workbook.web.dto.user;
 import com.workbook.domain.user.Role;
 import com.workbook.domain.user.User;
 import lombok.Builder;

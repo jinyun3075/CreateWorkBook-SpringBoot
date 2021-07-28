@@ -9,6 +9,7 @@
             <li><a href="/">Home</a></li>
             <li><a href="/elements">Elements</a></li>
             {{#user}}
+                <li><a href="/update" methods="get">업데이트</a></li>
                 <li><a href="/logout" methods="post">logout</a></li>
                 <li>{{user}}님 환영합니다.</li>
             {{/user}}
@@ -152,5 +153,4 @@
 </footer>
 
 </body>
-</html>
 {{>layout/footer}}

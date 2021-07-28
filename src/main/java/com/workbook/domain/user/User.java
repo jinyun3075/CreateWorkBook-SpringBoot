@@ -15,7 +15,7 @@ import java.util.Collections;
 @Getter
 @NoArgsConstructor
 @Entity
-public class User implements UserDetails {
+public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,12 +32,18 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String auth;
 
+
+
     @Builder
     public User(String userid, String pw, String name,String auth){
         this.name=name;
         this.pw=pw;
         this.userid=userid;
         this.auth =auth;
+    }
+    public void update(String pw, String name){
+        this.pw=pw;
+        this.name=name;
     }
 
     @Override

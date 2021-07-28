@@ -2,8 +2,10 @@ package com.workbook.service.user;
 
 
 
+import com.workbook.domain.user.User;
 import com.workbook.domain.user.UserRepository;
-import com.workbook.web.dto.UserJoinDto;
+import com.workbook.web.dto.user.UserJoinDto;
+import com.workbook.web.dto.user.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +27,15 @@ public class UserService implements UserDetailsService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         userJoinDto.setPw(encoder.encode(userJoinDto.getPw()));
         return userRepository.save(userJoinDto.toEntity()).getId();
+    }
+    @Transactional
+    public Long update(Long id,UserUpdateDto userUpdateDto){
+        User user = userRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("수정할 수 없습니다.="+id));
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        userUpdateDto.setPw(encoder.encode(userUpdateDto.getPw()));
+        user.update(userUpdateDto.getPw(), userUpdateDto.getName());
+        return id;
     }
 
     @Override
