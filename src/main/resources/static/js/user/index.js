@@ -18,7 +18,7 @@ var main={
                 data: JSON.stringify(data)
             }).done(function(){
                 alert('회원가입 되었습니다.');
-                window.location.href ='/';
+                window.location.href ='/login';
             }).fail(function(error){
                 alert('회원가입 실패');
             });
@@ -26,7 +26,8 @@ var main={
       update : function(){
             var data={
                 pw : $('#pw').val(),
-                name : $('#name').val()
+                name : $('#name').val(),
+                pwcheck :$('#pwcheck').val()
             };
 
             var id= $('#id').val();
@@ -36,9 +37,14 @@ var main={
                 dateType : 'json',
                 contentType : 'application/json; charset=utf-8',
                 data : JSON.stringify(data)
-            }).done(function(){
-                alert('정보가 수정되었습니다.');
-                window.location.href='/';
+            }).done(function(v){
+                if(v==-1){
+                    alert('비밀번호가 다릅니다.')
+                    window.location.href='/update';
+                }else{
+                    alert('정보가 수정되었습니다.');
+                    window.location.href='/update';
+                }
             }).fail(function(error){
                 alert('정보수정 실패');
             });

@@ -16,7 +16,8 @@ public class WorkBook extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long user_id;
+    @Column(name = "user_id")
+    private Long userid;
 
     @Column(nullable = false)
     private String title;
@@ -24,8 +25,8 @@ public class WorkBook extends BaseTimeEntity {
     private String sub;
 
 
-    @Builder WorkBook(Long user_id, String title, String sub){
-        this.user_id=user_id;
+    @Builder WorkBook(Long userid, String title, String sub){
+        this.userid=userid;
         this.title=title;
         this.sub=sub;
     }

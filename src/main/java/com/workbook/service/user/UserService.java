@@ -30,12 +30,17 @@ public class UserService implements UserDetailsService {
     }
     @Transactional
     public Long update(Long id,UserUpdateDto userUpdateDto){
-        User user = userRepository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("수정할 수 없습니다.="+id));
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        userUpdateDto.setPw(encoder.encode(userUpdateDto.getPw()));
-        user.update(userUpdateDto.getPw(), userUpdateDto.getName());
-        return id;
+        if(userUpdateDto.getPw().equals(userUpdateDto.getPwcheck())){
+            User user = userRepository.findById(id)
+                    .orElseThrow(()->new IllegalArgumentException("수정할 수 없습니다.="+id));
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            userUpdateDto.setPw(encoder.encode(userUpdateDto.getPw()));
+            user.update(userUpdateDto.getPw(), userUpdateDto.getName());
+            return id;
+        }else{
+            return (long) -1;
+        }
+
     }
 
     @Override

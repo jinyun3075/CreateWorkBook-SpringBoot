@@ -1,41 +1,23 @@
 {{>layout/header}}
 <h3>Table</h3>
-<h4>Default</h4>
+<h4>{{user_id}}</h4>
 <div class="table-wrapper">
     <table>
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
+            <th>번호</th>
+            <th>제목</th>
+            <th>최종 수정일</th>
         </tr>
         </thead>
         <tbody>
+        {{#user}}
         <tr>
-            <td>Item 1</td>
-            <td>Ante turpis integer aliquet porttitor.</td>
-            <td>29.99</td>
+            <td>{{id}}</td>
+            <td>{{title}}</td>
+            <td>{{modifiedDate}}</td>
         </tr>
-        <tr>
-            <td>Item 2</td>
-            <td>Vis ac commodo adipiscing arcu aliquet.</td>
-            <td>19.99</td>
-        </tr>
-        <tr>
-            <td>Item 3</td>
-            <td> Morbi faucibus arcu accumsan lorem.</td>
-            <td>29.99</td>
-        </tr>
-        <tr>
-            <td>Item 4</td>
-            <td>Vitae integer tempus condimentum.</td>
-            <td>19.99</td>
-        </tr>
-        <tr>
-            <td>Item 5</td>
-            <td>Ante turpis integer aliquet porttitor.</td>
-            <td>29.99</td>
-        </tr>
+        {{/user}}
         </tbody>
         <tfoot>
         <tr>
