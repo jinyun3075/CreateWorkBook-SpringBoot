@@ -6,12 +6,12 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class WorkBookListDto {
+public class WorkListDto {
     private Long id;
     private String title;
     private LocalDateTime modifiedDate;
 
-    public WorkBookListDto(WorkBook workBook){
+    public WorkListDto(WorkBook workBook){
         this.id=workBook.getId();
         this.title=workBook.getTitle();
         this.modifiedDate=workBook.getModifiedDate();

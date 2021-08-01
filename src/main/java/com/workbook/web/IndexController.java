@@ -9,13 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
+
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
     private final WorkService workService;
+    User user =null;
     @GetMapping("/")
     public String index(Model model,Authentication authentication){
-        User user =null;
         if(authentication!=null){
         user =(User)authentication.getPrincipal();
             model.addAttribute("user_name",user.getName());
@@ -32,18 +34,27 @@ public class IndexController {
 
     @GetMapping("/update")
     public String update(Model model,Authentication authentication){
-        User user =(User)authentication.getPrincipal();
+        user =(User)authentication.getPrincipal();
         model.addAttribute("user_id",user.getId());
         return "update";
     }
 
     @GetMapping("/workbook")
-    public String work(Model model,Authentication authentication){
-        User user =(User)authentication.getPrincipal();
+    public String work(Model model,Authentication authentication) throws IOException {
+        user =(User)authentication.getPrincipal();
+        model.addAttribute("userid",user.getId());
         model.addAttribute("user",workService.GetList(user.getId()));
-        return "publicwork/index";
+        return "publicWork/index";
     }
 
+    @GetMapping("/workbook/create")
+    public String create(Model model,Authentication authentication)
+    {
+        user =(User)authentication.getPrincipal();
+        model.addAttribute("userid",user.getId());
+
+        return "publicWork/create";
+    }
     @GetMapping("/admin")
     public @ResponseBody String ad(){
         return "adminPage";

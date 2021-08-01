@@ -1,5 +1,6 @@
 package com.workbook.domain.user;
 
+import com.workbook.domain.workBook.WorkBook;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 
 @Getter
@@ -26,12 +28,15 @@ public class User implements UserDetails{
     @Column(nullable = false)
     private String pw;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String userid;
 
     @Column(nullable = false)
     private String auth;
 
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private Set<WorkBook> u;
 
 
     @Builder

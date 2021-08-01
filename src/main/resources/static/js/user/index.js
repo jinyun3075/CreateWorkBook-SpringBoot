@@ -20,7 +20,7 @@ var main={
                 alert('회원가입 되었습니다.');
                 window.location.href ='/login';
             }).fail(function(error){
-                alert('회원가입 실패');
+                alert('아이디 중복');
             });
         },
       update : function(){

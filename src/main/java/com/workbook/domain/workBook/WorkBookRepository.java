@@ -6,5 +6,5 @@ import java.util.List;
 
 
 public interface WorkBookRepository extends JpaRepository<WorkBook,Long> {
-    List<WorkBook> findByUserid(Long userid);
+
 }

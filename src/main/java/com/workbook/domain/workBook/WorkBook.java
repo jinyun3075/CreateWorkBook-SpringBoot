@@ -1,6 +1,7 @@
 package com.workbook.domain.workBook;
 
 import com.workbook.domain.BaseTimeEntity;
+import com.workbook.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,8 +17,6 @@ public class WorkBook extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id")
-    private Long userid;
 
     @Column(nullable = false)
     private String title;
@@ -25,8 +24,7 @@ public class WorkBook extends BaseTimeEntity {
     private String sub;
 
 
-    @Builder WorkBook(Long userid, String title, String sub){
-        this.userid=userid;
+    @Builder WorkBook( String title, String sub){
         this.title=title;
         this.sub=sub;
     }

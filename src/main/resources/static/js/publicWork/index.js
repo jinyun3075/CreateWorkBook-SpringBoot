@@ -1,26 +1,27 @@
 var main={
     init : function(){
         var _this = this;
-        $('#join').on('click',function(){_this.join();});
-        $('#update').on('click',function(){_this.update();});
+        $('#create').on('click',function(){_this.create();});
+
     },
-    join : function(){
+    create : function(){
             var data={
-                userid: $('#userid').val(),
-                pw: $('#pw').val(),
-                name: $('#name').val()
+                title : $('#title').val(),
+                sub : $('#sub').val(),
+                userid:$('#userid').val()
             };
+
              $.ajax({
                 type:'POST',
-                url: '/api/join',
+                url: '/work/create',
                 dataType: 'json',
                 contentType:'application/json; charset=utf-8',
-                data: JSON.stringify(data)
+                data : JSON.stringify(data)
             }).done(function(){
-                alert('회원가입 되었습니다.');
-                window.location.href ='/login';
+                alert('문제집이 만들어 졌습니다!');
+                window.location.href ='/workbook';
             }).fail(function(error){
-                alert('아이디 중복');
+                alert('만들기 실패');
             });
         },
       update : function(){
