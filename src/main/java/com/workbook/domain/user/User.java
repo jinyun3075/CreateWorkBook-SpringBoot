@@ -1,5 +1,6 @@
 package com.workbook.domain.user;
 
+import com.workbook.domain.work.LinkWork;
 import com.workbook.domain.workBook.WorkBook;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,9 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Set;
+import java.util.*;
 
 
 @Getter
@@ -36,7 +35,11 @@ public class User implements UserDetails{
 
     @OneToMany
     @JoinColumn(name = "user_id")
-    private Set<WorkBook> u;
+    private List<WorkBook> u ;
+
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<LinkWork> l;
 
 
     @Builder

@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/work")
 public class WorkController {
     private final WorkService workService;
-    @PostMapping("/create")
-    public Long create(@RequestBody WorkCreateDto dto){
-        return workService.create(dto);
+    @PostMapping("/create/{id}")
+    public Long create(@PathVariable Long id,@RequestBody WorkCreateDto workCreateDto){
+        System.out.println("view 문제");
+        return workService.create(workCreateDto,id);
     }
 
 }

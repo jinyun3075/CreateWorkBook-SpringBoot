@@ -1,5 +1,5 @@
 {{>layout/header}}
-<h3>Table</h3>
+<h4>Table</h4>
 <div class="table-wrapper">
     <table>
         <thead>
@@ -13,7 +13,7 @@
         {{#user}}
         <tr>
             <td>{{id}}</td>
-            <td>{{title}}</td>
+            <td><a href="/workbook/view/{{id}}">{{title}}</a></td>
             <td>{{modifiedDate}}</td>
         </tr>
         {{/user}}

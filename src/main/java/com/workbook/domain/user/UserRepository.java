@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User,Long> {
         Optional<User> findByUserid(String userid);
 
-        List<WorkBook> findByU(Long id);
+        List<WorkBook> findByU(WorkBook id);
 
 }
