@@ -9,12 +9,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class WorkCreateDto {
+public class WorkBookCreateDto {
     private String title;
     private String sub;
 
     @Builder
-    public WorkCreateDto(String title,String sub){
+    public WorkBookCreateDto(String title, String sub){
         this.title=title;
         this.sub=sub;
     }

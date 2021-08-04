@@ -1,9 +1,11 @@
 package com.workbook.web;
 
-import com.workbook.domain.workBook.WorkBookRepository;
+import com.workbook.domain.user.User;
 import com.workbook.service.user.WorkService;
-import com.workbook.web.dto.workBook.WorkCreateDto;
+import com.workbook.web.dto.Work.WorkCreateDto;
+import com.workbook.web.dto.workBook.WorkBookCreateDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,10 +13,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/work")
 public class WorkController {
     private final WorkService workService;
-    @PostMapping("/create/{id}")
-    public Long create(@PathVariable Long id,@RequestBody WorkCreateDto workCreateDto){
-        System.out.println("view 문제");
-        return workService.create(workCreateDto,id);
+    @PostMapping("/WorkBookCreate/{id}")
+    public Long WorkBookCreate(@PathVariable Long id,@RequestBody WorkBookCreateDto workBookCreateDto){
+        return workService.createBook(workBookCreateDto,id);
     }
+    @PostMapping("/WorkCreate/{bookId}")
+    public Long WorkCreate(@RequestBody WorkCreateDto workCreateDto, @PathVariable Long bookId
+    , Authentication authentication){
+        User user = (User)authentication.getPrincipal();
+        return workService.createWork(workCreateDto,bookId,user.getId());
+
+    }
+
 
 }

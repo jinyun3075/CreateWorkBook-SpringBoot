@@ -2,11 +2,17 @@ package com.workbook.service.user;
 
 import com.workbook.domain.user.User;
 import com.workbook.domain.user.UserRepository;
+import com.workbook.domain.work.LinkWork;
+import com.workbook.domain.work.LinkWorkRepository;
+import com.workbook.domain.work.Work;
+import com.workbook.domain.work.WorkRepository;
 import com.workbook.domain.workBook.WorkBook;
 import com.workbook.domain.workBook.WorkBookRepository;
-import com.workbook.web.dto.workBook.WorkCreateDto;
-import com.workbook.web.dto.workBook.WorkListDto;
+import com.workbook.web.dto.Work.WorkCreateDto;
+import com.workbook.web.dto.workBook.WorkBookCreateDto;
+import com.workbook.web.dto.workBook.WorkBookListDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,27 +25,41 @@ import java.util.stream.Collectors;
 public class WorkService {
     private final WorkBookRepository workBookRepository;
     private final UserRepository userRepository;
+    private final LinkWorkRepository linkWorkRepository;
+    private final WorkRepository workRepository;
     @Transactional(readOnly = true)
-    public List<WorkListDto> GetList(Long id) throws IOException {
+    public List<WorkBookListDto> getList(Long id) throws IOException {
         User user = userRepository.findById(id)
                 .orElseThrow(()->new IllegalAccessError("ㅎㅇ"+id ));
         List<WorkBook> workBook = workBookRepository.findByUserid(user);
 
-       return workBook.stream().map(WorkListDto::new).collect(Collectors.toList());
+       return workBook.stream().map(WorkBookListDto::new).collect(Collectors.toList());
 
     }
 
     @Transactional
-    public Long create(WorkCreateDto dto,Long id){
+    public Long createBook(WorkBookCreateDto dto, Long id){
         User user = userRepository.findById(id)
                 .orElseThrow(()->new IllegalAccessError("ㅎㅇ"+id ));
-        System.out.println("service");
-        return workBookRepository.save(WorkBook.builder()
+        return linkWorkRepository.save(LinkWork.builder()
+                .user(user)
+                .workbook(workBookRepository.save(WorkBook.builder()
                         .title(dto.getTitle())
                         .sub(dto.getSub())
                         .userid(user)
-                .build()
-        ).getId();
+                        .build()
+                )).build()).getId();
+    }
+
+    @Transactional
+    public Long createWork(WorkCreateDto dto, Long bookId, Long userId){
+        User user = userRepository.findById(userId)
+                .orElseThrow(()->new IllegalAccessError("ㅎㅇ"+userId ));
+        WorkBook workBook=workBookRepository.findById(bookId)
+                .orElseThrow(()->new IllegalAccessError("ㅎㅇ"+bookId ));
+        LinkWork linkWork=linkWorkRepository.findByUserAndWorkbook(user,workBook);
+
+        return workRepository.save(dto.toEntity(dto,linkWork)).getId();
     }
 
 

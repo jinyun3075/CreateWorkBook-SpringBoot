@@ -1,0 +1,40 @@
+{{>layout/header}}
+
+<h1>문제 생성 페이지</h1>
+<div class="col-md-12">
+    <div class="col-md-4">
+        <form>
+            <input type="hidden" id="bookid" value="{{id}}">
+            <div class="form-group">
+                <label for="문제">문제</label>
+                <input type="text" class="form-control" id="question" placeholder="문제">
+            </div>
+            <div class="form-group">
+                <label for="보기1"> 보기1 </label>
+                <input type="text" class="form-control" id="sel1" placeholder="보기1">
+            </div>
+            <div class="form-group">
+                <label for="보기2"> 보기2 </label>
+                <input type="text" class="form-control" id="sel2" placeholder="보기2">
+            </div>
+            <div class="form-group">
+                <label for="보기3"> 보기3 </label>
+                <input type="text" class="form-control" id="sel3" placeholder="보기3">
+            </div>
+            <div class="form-group">
+                <label for="보기4"> 보기4 </label>
+                <input type="text" class="form-control" id="sel4" placeholder="보기4">
+            </div>
+                <label for="정답">정답 선택 </label>
+                1번<input type="radio" name="select" value="1">&nbsp;
+                2번<input type="radio" name="select" value="2">&nbsp;
+                3번<input type="radio" name="select" value="3">&nbsp;
+                4번<input type="radio" name="select" value="4">&nbsp;
+        </form>
+        <button type="button" class="btn btn-primary" id="createWork">만들기</button>
+    </div>
+</div>
+</body>
+<script src ="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="/js/publicWork/index.js?ver=1"></script>
+</html>

@@ -2,6 +2,7 @@ package com.workbook.domain.workBook;
 
 import com.workbook.domain.BaseTimeEntity;
 import com.workbook.domain.user.User;
+import com.workbook.domain.work.LinkWork;
 import com.workbook.domain.work.Work;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,7 +32,7 @@ public class WorkBook extends BaseTimeEntity {
 
     @OneToMany
     @JoinColumn(name = "workbook_id")
-    List<WorkBook> l;
+    List<LinkWork> l;
 
 
 

@@ -23,7 +23,7 @@ public class WorkViewController {
     public String work(Model model, Authentication authentication) throws IOException {
         user =(User)authentication.getPrincipal();
         model.addAttribute("userid",user.getId());
-        model.addAttribute("user",workService.GetList(user.getId()));
+        model.addAttribute("user",workService.getList(user.getId()));
         return "publicWork/index";
     }
 
@@ -38,6 +38,6 @@ public class WorkViewController {
     @GetMapping("/view/{id}")
     public String view(Model model, @PathVariable Long id){
         model.addAttribute("id",id);
-        return "publicWork/view";
+        return "publicWork/work/create";
     }
 }

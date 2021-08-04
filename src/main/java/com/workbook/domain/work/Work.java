@@ -28,19 +28,20 @@ public class Work {
     private String sel4;
 
     @Column(nullable = false)
-    private String val;
+    private Long val;
 
     @ManyToOne
-    @JoinColumn(name = "ling_id")
+    @JoinColumn(name = "link_id")
     LinkWork linkWork;
 
     @Builder
-    public Work(String question,String sel1,String sel2,String sel3, String sel4,String val){
+    public Work(String question,String sel1,String sel2,String sel3, String sel4,Long val,LinkWork linkWork){
         this.question=question;
         this.sel1=sel1;
         this.sel2=sel2;
         this.sel3=sel3;
         this.sel4=sel4;
         this.val=val;
+        this.linkWork=linkWork;
     }
 }
