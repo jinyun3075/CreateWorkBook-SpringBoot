@@ -4,15 +4,15 @@ import com.workbook.domain.user.User;
 import com.workbook.domain.user.UserRepository;
 import com.workbook.domain.work.LinkWork;
 import com.workbook.domain.work.LinkWorkRepository;
-import com.workbook.domain.work.Work;
 import com.workbook.domain.work.WorkRepository;
 import com.workbook.domain.workBook.WorkBook;
 import com.workbook.domain.workBook.WorkBookRepository;
-import com.workbook.web.dto.Work.WorkCreateDto;
+import com.workbook.web.dto.work.WorkCreateDto;
+import com.workbook.web.dto.work.WorkListDto;
 import com.workbook.web.dto.workBook.WorkBookCreateDto;
 import com.workbook.web.dto.workBook.WorkBookListDto;
+import com.workbook.web.dto.workBook.WorkBookSub;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +35,24 @@ public class WorkService {
 
        return workBook.stream().map(WorkBookListDto::new).collect(Collectors.toList());
 
+    }
+    @Transactional(readOnly = true)
+    public String sub(Long id) throws IOException {
+        WorkBook workBook = workBookRepository.findById(id)
+                .orElseThrow(()->new IllegalAccessError("ㅎㅇ"+id ));
+        return workBook.getSub();
+
+    }
+    @Transactional(readOnly = true)
+    public List<WorkListDto> getListWork(Long user_id,Long work_id){
+        User user = userRepository.findById(user_id)
+                .orElseThrow(()->new IllegalAccessError("ㅎㅇ"+user_id ));
+        WorkBook workBook=workBookRepository.findById(work_id)
+                .orElseThrow(()->new IllegalAccessError("ㅎㅇ"+work_id ));
+        LinkWork linkWork=linkWorkRepository.findByUserAndWorkbook(user,workBook);
+
+       return workRepository.findByLinkWork(linkWork)
+                .stream().map(WorkListDto::new).collect(Collectors.toList());
     }
 
     @Transactional

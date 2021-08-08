@@ -43,9 +43,9 @@ var main={
                 dataType : 'json',
                 contentType :'application/json; charset=utf-8',
                 data : JSON.stringify(data)
-            }).done(function(){
-                alert('문제생성');
-                window.location.href ='/workbook';
+            }).done(function(id){
+                alert('문제가 만들어졌습니다.');
+                window.location.href ='/workbook/view/'+id;
             }).fail(function(error){
                 alert('칸을 다 채워주세요');
             });

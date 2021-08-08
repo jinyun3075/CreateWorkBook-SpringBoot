@@ -1,4 +1,4 @@
-package com.workbook.web.dto.Work;
+package com.workbook.web.dto.work;
 
 import com.workbook.domain.work.LinkWork;
 import com.workbook.domain.work.Work;

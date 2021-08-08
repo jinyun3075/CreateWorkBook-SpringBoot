@@ -10,13 +10,13 @@
         </tr>
         </thead>
         <tbody>
-        {{#user}}
+        {{#workBook}}
         <tr>
             <td>{{id}}</td>
             <td><a href="/workbook/view/{{id}}">{{title}}</a></td>
             <td>{{modifiedDate}}</td>
         </tr>
-        {{/user}}
+        {{/workBook}}
         </tbody>
         <input type="hidden" id="userid" value="{{userid}}">
         <a href="/workbook/create">문제집 만들기</a>

@@ -2,7 +2,7 @@ package com.workbook.web;
 
 import com.workbook.domain.user.User;
 import com.workbook.service.user.WorkService;
-import com.workbook.web.dto.Work.WorkCreateDto;
+import com.workbook.web.dto.work.WorkCreateDto;
 import com.workbook.web.dto.workBook.WorkBookCreateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -21,8 +21,8 @@ public class WorkController {
     public Long WorkCreate(@RequestBody WorkCreateDto workCreateDto, @PathVariable Long bookId
     , Authentication authentication){
         User user = (User)authentication.getPrincipal();
-        return workService.createWork(workCreateDto,bookId,user.getId());
-
+        workService.createWork(workCreateDto,bookId,user.getId());
+        return bookId;
     }
 
 
