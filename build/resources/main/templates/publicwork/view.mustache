@@ -1,7 +1,17 @@
+{{>layout/header}}
+
 {{sub}}<br/>
 
 -------------------------------------------<br/>
 {{#work}}
-    {{id}}번 문제.  :  {{title}} //문제 수정하기<br/>
+    {{id}}번 문제.  :  {{question}} //문제 수정하기<br/>
 {{/work}}
+
+<td><a href="/workbook/solving/{{bookId}}">문제 풀기</a></td>
 <td><a href="/workbook/view/create/{{bookId}}">문제 만들기</a></td>
+
+
+</body>
+<script src ="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="/js/publicWork/index.js?ver=1"></script>
+</html>
