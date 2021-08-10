@@ -46,12 +46,12 @@ com/workbook/web/dto/work/WorkCreateDto.java
  com.workbook.web.dto.work.WorkCreateDto$WorkCreateDtoBuilder
 com/workbook/domain/work/WorkRepository.java
  com.workbook.domain.work.WorkRepository
-com/workbook/web/WorkController.java
- com.workbook.web.WorkController
 com/workbook/web/dto/workBook/WorkBookSub.java
  com.workbook.web.dto.workBook.WorkBookSub
 com/workbook/web/WorkViewController.java
  com.workbook.web.WorkViewController
+com/workbook/web/WorkController.java
+ com.workbook.web.WorkController
 com/workbook/service/user/WorkService.java
  com.workbook.service.user.WorkService
 com/workbook/web/dto/work/WorkListDto.java

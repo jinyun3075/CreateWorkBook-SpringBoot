@@ -3,15 +3,15 @@ package com.workbook.web;
 import com.workbook.domain.user.User;
 
 import com.workbook.service.user.WorkService;
+import com.workbook.web.dto.work.WorkListDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -48,6 +48,14 @@ public class WorkViewController {
     public String createView(Model model, @PathVariable Long id){
         model.addAttribute("id",id);
         return "publicWork/work/create";
+    }
+
+    @GetMapping("/solving/{bookId}")
+    public String solving(@PathVariable Long bookId, Authentication authentication, Model model){
+        User user =(User)authentication.getPrincipal();
+        List<WorkListDto> list=workService.getListWork(user.getId(),bookId);
+            model.addAttribute("sol",list.get(0));
+        return "publicWork/work/solvingView";
     }
 
 

@@ -3,10 +3,14 @@ package com.workbook.web;
 import com.workbook.domain.user.User;
 import com.workbook.service.user.WorkService;
 import com.workbook.web.dto.work.WorkCreateDto;
+import com.workbook.web.dto.work.WorkListDto;
 import com.workbook.web.dto.workBook.WorkBookCreateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,6 +28,4 @@ public class WorkController {
         workService.createWork(workCreateDto,bookId,user.getId());
         return bookId;
     }
-
-
 }
