@@ -1,9 +1,22 @@
-{{#sol}}
-    {{id}}<br/>
-    {{question}}<br/>
-    {{sel1}}<br/>
-    {{sel2}}<br/>
-    {{sel3}}<br/>
-    {{sel4}}<br/>
-    {{val}}<br/>
-{{/sol}}
+{{>layout/header}}
+
+<div id="v">
+    {{#sol}}
+        {{id}}번 문제 : {{question}}<br/>
+        <form>
+            1번 : <input type="radio" name="val_C" value="1">{{sel1}}<br/>
+            2번 : <input type="radio" name="val_C" value="2">{{sel2}}<br/>
+            3번 : <input type="radio" name="val_C" value="3">{{sel3}}<br/>
+            4번 : <input type="radio" name="val_C" value="4">{{sel4}}<br/>
+            <input type="hidden" value="{{val}}" id="val">
+        </form>
+    {{/sol}}
+    <input type="hidden" value="{{bookId}}" id="bookId">
+    <input type="hidden" value="{{index}}" id="location">
+    <button type="button" id="pre">이전</button>
+    <button type="button" id="next">다음</button>
+</div>
+</body>
+<script src ="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="/js/publicWork/index.js?ver=1"></script>
+</html>

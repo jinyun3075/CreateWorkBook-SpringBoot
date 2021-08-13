@@ -3,7 +3,8 @@ var main={
         var _this = this;
         $('#create').on('click',function(){_this.create();});
         $('#createWork').on('click',function(){_this.createWork();});
-
+        $('#next').on('click',function(){_this.next();});
+        $('#pre').on('click',function(){_this.resolving();});
     },
     create : function(){
             var data={
@@ -50,6 +51,29 @@ var main={
                 alert('칸을 다 채워주세요');
             });
 
+    },
+    next : function(){
+                    var data={
+                        location : $('#location').val(),
+                        val : $("input[name ='val_C']:checked").val(),
+                        valCheck : $('#val').val(),
+                        next : 1,
+                    };
+
+                    var book = $('#bookId').val();
+
+                     $.ajax({
+                        type : 'POST',
+                        url : '/work/solving/view/next/'+book,
+                        dataType : 'json',
+                        contentType :'application/json; charset=utf-8',
+                        data : JSON.stringify(data)
+                    }).done(function(){
+                            $('#v').children().remove;
+                            $('#v').html($('#so'));
+                        }).fail(function(error){
+                        alert('실패');
+                    });
     }
 }
 main.init();
