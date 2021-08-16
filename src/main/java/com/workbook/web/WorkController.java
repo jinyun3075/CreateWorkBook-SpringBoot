@@ -38,17 +38,17 @@ public class WorkController {
         model.addAttribute("in",in+1);
         return 1l;
     }
+    @ResponseBody
     @PostMapping("/solving/view/next/{bookId}")
-    public int nextView(@RequestBody WorkSolvDto workSolvDto, Model model, Authentication authentication, @PathVariable Long bookId){
+    public WorkViewDto nextView(@RequestBody WorkSolvDto workSolvDto, Model model, Authentication authentication, @PathVariable Long bookId){
         User user =(User)authentication.getPrincipal();
         List<WorkListDto> list=workService.getListWork(user.getId(),bookId);
         String index =workSolvDto.getLocation();
         if(workSolvDto.getVal()!=workSolvDto.getValCheck()){
             Cookie cookie = new Cookie(index,index);
         }
-        model.addAttribute("sol",list.get(Integer.parseInt(index)+1));
-        model.addAttribute("index",Integer.parseInt(index)+1);
-        model.addAttribute("bookId",bookId);
-        return 1;
+        WorkViewDto workViewDto = new WorkViewDto(list.get(Integer.parseInt(index)+1),Integer.parseInt(index)+1,bookId);
+
+        return workViewDto ;
     }
 }

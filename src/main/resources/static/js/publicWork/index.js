@@ -1,3 +1,4 @@
+
 var main={
     init : function(){
         var _this = this;
@@ -68,9 +69,10 @@ var main={
                         dataType : 'json',
                         contentType :'application/json; charset=utf-8',
                         data : JSON.stringify(data)
-                    }).done(function(){
-                            $('#v').children().remove;
-                            $('#v').html($('#so'));
+                    }).done(function(d){
+                    var ht = $('#v').html();
+                        Mustache.parse(ht);
+                        $('#v').html(Mustache.render(ht,d));
                         }).fail(function(error){
                         alert('실패');
                     });
